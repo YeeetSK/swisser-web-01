@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap, ScrollTrigger } from '../../lib/gsap-config'
 import siteConfig from '../../config/site.config.json'
+import { getAssetUrl } from '../../utils/assetUrl'
 
 export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -137,7 +138,7 @@ export const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="/images/hero/city-night.jpg" 
+          src={getAssetUrl("/images/hero/city-night.jpg")} 
           alt="Los Santos City" 
           className="w-full h-full object-cover"
         />

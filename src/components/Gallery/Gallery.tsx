@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react'
 import { gsap, ScrollTrigger, createBatchScrollTrigger } from '../../lib/gsap-config'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import siteConfig from '../../config/site.config.json'
+import { getAssetUrl } from '../../utils/assetUrl'
 
 // Gallery images from config
 const galleryImages = siteConfig.gallery.images
@@ -126,7 +127,7 @@ export const Gallery = () => {
               >
                 {/* Image */}
                 <img 
-                  src={image.src} 
+                  src={getAssetUrl(image.src)} 
                   alt={image.alt}
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -188,7 +189,7 @@ export const Gallery = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <img 
-              src={galleryImages[selectedImage].src}
+              src={getAssetUrl(galleryImages[selectedImage].src)}
               alt={galleryImages[selectedImage].alt}
               className="w-full h-auto rounded-lg"
             />

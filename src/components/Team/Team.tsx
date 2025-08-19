@@ -4,6 +4,7 @@ import { gsap, ScrollTrigger } from '../../lib/gsap-config'
 import { MessageCircle, Crown, Shield, Wrench } from 'lucide-react'
 import siteConfig from '../../config/site.config.json'
 import { cn } from '../../utils/cn'
+import { getAssetUrl } from '../../utils/assetUrl'
 
 const roleIcons: Record<string, React.ReactNode> = {
   'Server Owner': <Crown className="w-4 h-4" />,
@@ -162,7 +163,7 @@ export const Team = () => {
                   <div className="avatar-container mb-4 relative inline-block">
                     <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-neon-cyan to-neon-magenta p-[2px]">
                       <img 
-                        src={member.avatar}
+                        src={getAssetUrl(member.avatar)}
                         alt={member.name}
                         className="w-full h-full rounded-full object-cover"
                       />
