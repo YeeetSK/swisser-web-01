@@ -19,7 +19,7 @@ ScrollTrigger.defaults({
 })
 
 // Debounced refresh
-let refreshTimeout: NodeJS.Timeout
+let refreshTimeout: ReturnType<typeof setTimeout>
 const debouncedRefresh = () => {
   clearTimeout(refreshTimeout)
   refreshTimeout = setTimeout(() => {
@@ -63,10 +63,10 @@ export const createBatchScrollTrigger = (
   triggerConfig?: ScrollTrigger.Vars
 ) => {
   ScrollTrigger.batch(elements, {
-    onEnter: (batch) => gsap.to(batch, animation),
-    onLeave: (batch) => gsap.to(batch, { ...animation, overwrite: 'auto' }),
-    onEnterBack: (batch) => gsap.to(batch, animation),
-    onLeaveBack: (batch) => gsap.to(batch, { ...animation, overwrite: 'auto' }),
+    onEnter: (batch: Element[]) => gsap.to(batch, animation),
+    onLeave: (batch: Element[]) => gsap.to(batch, { ...animation, overwrite: 'auto' }),
+    onEnterBack: (batch: Element[]) => gsap.to(batch, animation),
+    onLeaveBack: (batch: Element[]) => gsap.to(batch, { ...animation, overwrite: 'auto' }),
     ...triggerConfig
   })
 }

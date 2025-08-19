@@ -147,7 +147,7 @@ export const Team = () => {
 
         {/* Team Grid */}
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {siteConfig.team.map((member, index) => (
+          {siteConfig.team.map((member) => (
             <div
               key={member.id}
               className="team-card group"

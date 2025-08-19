@@ -28,7 +28,7 @@ export const BottomNavigation = () => {
       label: 'Server', 
       icon: <Gamepad2 size={20} />,
       href: '#features',
-      badge: onlinePlayers
+      badge: onlinePlayers !== null ? String(onlinePlayers) : undefined
     },
     { 
       id: 'jobs', 
