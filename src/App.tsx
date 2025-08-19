@@ -31,8 +31,10 @@ function App() {
     return () => clearTimeout(timer)
   }, [])
 
+  const basename = import.meta.env.BASE_URL || '/'
+  
   return (
-    <Router>
+    <Router basename={basename}>
       <ScrollToTop />
       <div className="min-h-screen bg-cyber-dark">
         <Routes>
