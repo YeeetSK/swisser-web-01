@@ -63,12 +63,20 @@ export const createBatchScrollTrigger = (
   triggerConfig?: ScrollTrigger.Vars
 ) => {
   ScrollTrigger.batch(elements, {
-    onEnter: (batch: Element[]) => gsap.to(batch, animation),
-    onLeave: (batch: Element[]) => gsap.to(batch, { ...animation, overwrite: 'auto' }),
-    onEnterBack: (batch: Element[]) => gsap.to(batch, animation),
-    onLeaveBack: (batch: Element[]) => gsap.to(batch, { ...animation, overwrite: 'auto' }),
+    onEnter: (targets: Element[]) => {
+      gsap.to(targets, animation)
+    },
+    onLeave: (targets: Element[]) => {
+      gsap.to(targets, { ...animation, overwrite: 'auto' })
+    },
+    onEnterBack: (targets: Element[]) => {
+      gsap.to(targets, animation)
+    },
+    onLeaveBack: (targets: Element[]) => {
+      gsap.to(targets, { ...animation, overwrite: 'auto' })
+    },
     ...triggerConfig
-  })
+  } as any)
 }
 
 // Export configured gsap and ScrollTrigger
