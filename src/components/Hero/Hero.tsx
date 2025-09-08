@@ -13,6 +13,7 @@ export const Hero = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [loadingProgress, setLoadingProgress] = useState(0)
   const [playerCount, setPlayerCount] = useState(0)
+  const [isServerOnline, setIsServerOnline] = useState(true)
 
   // Loading animation
   useEffect(() => {
@@ -30,24 +31,62 @@ export const Hero = () => {
     return () => clearInterval(timer)
   }, [])
 
-  // Player count animation
+  // Fetch live player data from CFX.re API
   useEffect(() => {
-    const targetCount = Math.floor(Math.random() * (siteConfig.server.maxPlayers - 100)) + 100
-    const duration = 2000
-    const increment = targetCount / (duration / 16)
-    let current = 0
-    
-    const timer = setInterval(() => {
-      current += increment
-      if (current >= targetCount) {
-        setPlayerCount(targetCount)
-        clearInterval(timer)
-      } else {
-        setPlayerCount(Math.floor(current))
+    const fetchPlayerData = async () => {
+      // Skip if no server code configured
+      if (!siteConfig.api.serverCode || siteConfig.api.serverCode === 'replaceme') {
+        console.warn('No server code configured. Please set your CFX.re server code in site.config.json')
+        setPlayerCount(Math.floor(Math.random() * 50) + 10)
+        setIsServerOnline(false)
+        return
       }
-    }, 16)
 
-    return () => clearInterval(timer)
+      try {
+        const response = await fetch(
+          `${siteConfig.api.cfxApiUrl}${siteConfig.api.serverCode}`,
+          {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+            }
+          }
+        )
+        
+        if (response.ok) {
+          const data = await response.json()
+          // CFX.re API returns data in Data.players array
+          if (data.Data && Array.isArray(data.Data.players)) {
+            const playerCount = data.Data.players.length
+            const maxPlayers = data.Data.sv_maxclients || siteConfig.server.maxPlayers
+            setPlayerCount(playerCount)
+            setIsServerOnline(true)
+            
+            // Optional: Update max players from server data
+            if (data.Data.sv_maxclients) {
+              siteConfig.server.maxPlayers = data.Data.sv_maxclients
+            }
+          } else {
+            throw new Error('Invalid response format')
+          }
+        } else {
+          throw new Error('Failed to fetch server data')
+        }
+      } catch (error) {
+        console.warn('Failed to fetch player data:', error)
+        // Fallback to random number if API fails
+        setPlayerCount(Math.floor(Math.random() * 50) + 10)
+        setIsServerOnline(false)
+      }
+    }
+
+    // Initial fetch
+    fetchPlayerData()
+
+    // Set up interval for periodic updates
+    const interval = setInterval(fetchPlayerData, siteConfig.api.refreshInterval)
+
+    return () => clearInterval(interval)
   }, [])
 
   useGSAP(() => {
@@ -190,7 +229,9 @@ export const Hero = () => {
                 </div>
                 <div className="stat-item">
                   <p className="stat-label">Server Status</p>
-                  <p className="stat-value text-gta-green">ONLINE</p>
+                  <p className={`stat-value ${isServerOnline ? 'text-gta-green' : 'text-red-500'}`}>
+                    {isServerOnline ? 'ONLINE' : 'OFFLINE'}
+                  </p>
                 </div>
                 <div className="stat-item">
                   <p className="stat-label">Active Jobs</p>

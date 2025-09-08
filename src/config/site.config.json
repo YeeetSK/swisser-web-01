@@ -288,6 +288,12 @@
       "description": "Player support and moderation"
     }
   ],
+  "api": {
+    "serverCode": "replaceme",
+    "cfxApiUrl": "https://servers-frontend.fivem.net/api/servers/single/",
+    "refreshInterval": 30000,
+    "_comment": "Get your serverCode from https://servers.fivem.net - search your server and copy the ID from URL"
+  },
   "social": {
     "discord": "https://discord.gg/nightcity",
     "twitter": "https://twitter.com/nightcityrp",

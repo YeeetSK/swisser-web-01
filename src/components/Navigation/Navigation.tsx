@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
-import { gsap, ScrollTrigger, smoothScrollTo } from '../../lib/gsap-config'
+import { ScrollTrigger, smoothScrollTo } from '../../lib/gsap-config'
 import { Home, Briefcase, Shield, Users, Image, ScrollText } from 'lucide-react'
 import siteConfig from '../../config/site.config.json'
 import { BottomNavigation } from './BottomNavigation'
@@ -52,32 +52,45 @@ const DesktopNavigation = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Initial check on mount
+  useEffect(() => {
+    // Ensure home is active on initial load when at top
+    if (window.scrollY < 100) {
+      setActiveSection('home')
+    }
+  }, [])
 
-  // GSAP animations for desktop nav
+
+  // Setup scroll-triggered active states
   useGSAP(() => {
-    // Clean entrance animation
-    gsap.from('.nav-item', {
-      y: -10,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.05,
-      ease: 'power2.out',
-      delay: 0.5
+    // Home section special handling
+    ScrollTrigger.create({
+      id: 'nav-home',
+      trigger: '#home',
+      start: 'top top',
+      end: 'bottom top+=80',
+      onEnter: () => setActiveSection('home'),
+      onEnterBack: () => setActiveSection('home'),
+      onLeaveBack: () => setActiveSection('home')
     })
-
+    
     // Setup scroll-triggered active states with unique IDs
     navItems.forEach((item) => {
       if (item.id !== 'home') {
         ScrollTrigger.create({
           id: `nav-${item.id}`,
           trigger: `#${item.id}`,
-          start: 'top center',
-          end: 'bottom center',
+          start: 'top top+=80',  // Account for fixed navbar height
+          end: 'bottom top+=80',
           onEnter: () => setActiveSection(item.id),
           onEnterBack: () => setActiveSection(item.id)
         })
       }
     })
+    
+    // Refresh and sort triggers after creation
+    ScrollTrigger.refresh()
+    ScrollTrigger.sort()
 
     // Cleanup function
     return () => {
@@ -86,7 +99,7 @@ const DesktopNavigation = () => {
         if (trigger) trigger.kill()
       })
     }
-  }, { scope: navRef })
+  })
 
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -101,13 +114,13 @@ const DesktopNavigation = () => {
       <nav 
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? 'glass-gta shadow-gta' : 'bg-transparent'
+          isScrolled ? 'glass-gta shadow-gta' : 'bg-gta-black/80 backdrop-blur-sm border-b border-white/10'
         }`}
       >
-        <div className="container-gta py-3 md:py-4">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className="flex items-center gap-2 md:gap-3">
+            <div className="flex items-center gap-2 md:gap-3 opacity-100 animate-fade-in">
               <div className="w-9 h-9 md:w-10 md:h-10 bg-gta-green flex items-center justify-center">
                 <span className="font-bebas text-lg md:text-xl text-white">RP</span>
               </div>
@@ -124,7 +137,7 @@ const DesktopNavigation = () => {
                   key={item.id}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`nav-item relative px-4 py-2 text-sm font-inter font-medium transition-all duration-300 ${
+                  className={`relative px-4 py-2 text-sm font-inter font-medium transition-all duration-300 opacity-100 animate-fade-in ${
                     activeSection === item.id 
                       ? 'text-gta-gold' 
                       : 'text-white/80 hover:text-white'
@@ -139,7 +152,7 @@ const DesktopNavigation = () => {
             </div>
 
             {/* CTA Buttons - Desktop */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 opacity-100 animate-fade-in">
               <button className="px-6 py-2 text-sm font-inter font-medium uppercase tracking-wider bg-gta-green text-white hover:bg-gta-green/90 transition-all duration-300">
                 Connect
               </button>

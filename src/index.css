@@ -113,8 +113,9 @@
 
   /* Glass Effect */
   .glass-gta {
-    @apply backdrop-blur-md bg-gta-black/70;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    @apply backdrop-blur-lg bg-gta-black/95;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   }
 
   /* Loading Bar */

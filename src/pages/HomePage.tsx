@@ -26,12 +26,24 @@ export const HomePage = () => {
     <>
       <Navigation />
       <main>
-        <Hero />
-        <Features />
-        <Jobs />
-        <Rules />
-        <Team />
-        <Gallery />
+        <section id="home">
+          <Hero />
+        </section>
+        <section id="features">
+          <Features />
+        </section>
+        <section id="jobs">
+          <Jobs />
+        </section>
+        <section id="rules">
+          <Rules />
+        </section>
+        <section id="team">
+          <Team />
+        </section>
+        <section id="gallery">
+          <Gallery />
+        </section>
       </main>
       <Footer />
     </>
