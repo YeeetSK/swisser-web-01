@@ -121,12 +121,26 @@ const DesktopNavigation = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center gap-2 md:gap-3 opacity-100 animate-fade-in">
-              <div className="w-9 h-9 md:w-10 md:h-10 bg-gta-green flex items-center justify-center">
-                <span className="font-bebas text-lg md:text-xl text-white">RP</span>
-              </div>
+              {siteConfig.server.logo.type === 'text' ? (
+                <div className="w-9 h-9 md:w-10 md:h-10 bg-gta-green flex items-center justify-center">
+                  <span className="font-bebas text-lg md:text-xl text-white">
+                    {siteConfig.server.logo.content}
+                  </span>
+                </div>
+              ) : (
+                <div className="w-9 h-9 md:w-10 md:h-10 overflow-hidden">
+                  <img 
+                    src={siteConfig.server.logo.content} 
+                    alt="Server Logo" 
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              )}
               <span className="font-bebas text-xl md:text-2xl text-white">
                 <span className="hidden sm:inline">{siteConfig.server.name}</span>
-                <span className="sm:hidden">NC-RP</span>
+                <span className="sm:hidden">
+                  {siteConfig.server.name.split(' ').map(word => word[0]).join('')}
+                </span>
               </span>
             </div>
 
@@ -153,9 +167,12 @@ const DesktopNavigation = () => {
 
             {/* CTA Buttons - Desktop */}
             <div className="flex items-center gap-4 opacity-100 animate-fade-in">
-              <button className="px-6 py-2 text-sm font-inter font-medium uppercase tracking-wider bg-gta-green text-white hover:bg-gta-green/90 transition-all duration-300">
+              <a 
+                href={`fivem://connect/${siteConfig.api.serverCode}`}
+                className="px-6 py-2 text-sm font-inter font-medium uppercase tracking-wider bg-gta-green text-white hover:bg-gta-green/90 transition-all duration-300 inline-block text-center"
+              >
                 Connect
-              </button>
+              </a>
               <a 
                 href={siteConfig.social.discord}
                 target="_blank"

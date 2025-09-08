@@ -85,6 +85,34 @@ Edit `src/config/site.config.json` to personalize:
 - Team members
 - Rules and requirements
 
+### 🎮 **FiveM Server Integration**
+
+#### Live Player Count & Direct Connect
+The template now supports live player data and direct server connection through the CFX.re API:
+
+1. **Find Your Server Code**:
+   - Go to [servers.fivem.net](https://servers.fivem.net)
+   - Search for your server by IP (e.g., `45.131.108.179`)
+   - Your server URL will be: `https://servers.fivem.net/servers/detail/abc123`
+   - Copy `abc123` (your server code)
+
+2. **Configure in `site.config.json`**:
+```json
+"api": {
+  "serverCode": "abc123",  // Replace with your server code
+  "cfxApiUrl": "https://servers-frontend.fivem.net/api/servers/single/",
+  "refreshInterval": 30000
+}
+```
+
+3. **Features Enabled**:
+   - ✅ **Live Player Count** - Updates every 30 seconds from CFX.re API
+   - ✅ **Server Status** - Shows ONLINE/OFFLINE based on API response
+   - ✅ **Direct Connect** - "Connect to Server" button uses `fivem://connect/abc123`
+   - ✅ **No CORS Issues** - CFX.re API has proper CORS headers
+
+The Connect button will automatically use the FiveM protocol (`fivem://connect/`) with your server code, allowing players to join directly from their browser!
+
 ### 2. **Visual Theming**
 Modify the color scheme in `tailwind.config.js`:
 - Primary and accent colors

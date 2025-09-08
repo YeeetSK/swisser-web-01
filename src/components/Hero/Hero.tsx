@@ -245,9 +245,12 @@ export const Hero = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-wrap gap-4">
-                <button className="btn-gta">
+                <a 
+                  href={`fivem://connect/${siteConfig.api.serverCode}`}
+                  className="btn-gta inline-block text-center"
+                >
                   Connect to Server
-                </button>
+                </a>
                 <a 
                   href={siteConfig.server.discord}
                   target="_blank"

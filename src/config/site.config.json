@@ -47,7 +47,11 @@
     "port": "30120",
     "discord": "https://discord.gg/nightcity",
     "maxPlayers": 256,
-    "logo": "/images/logo.png",
+    "logo": {
+      "type": "text",
+      "content": "RP",
+      "_comment": "type can be 'text' or 'image'. For text: content is the letters. For image: content is the path/URL"
+    },
     "loadingTips": [
       "Remember to stay in character at all times",
       "Press F1 to open the help menu",
