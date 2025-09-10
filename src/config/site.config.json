@@ -1,8 +1,8 @@
 {
   "seo": {
-    "title": "NightCity Roleplay - Premium GTA V FiveM RP Server",
-    "shortTitle": "NightCity RP",
-    "description": "Join the most immersive GTA V FiveM roleplay server. Custom framework, active community, realistic economy, and endless roleplay possibilities. Apply for whitelist today!",
+    "title": "AfterMath RP - Premium GTA V FiveM RP Server",
+    "shortTitle": "AfterMath RP",
+    "description": "Join the most immersive GTA V FiveM roleplay server. Custom framework, active community, realistic economy, and endless roleplay possibilities.",
     "keywords": [
       "FiveM", 
       "GTA V", 
@@ -11,23 +11,22 @@
       "GTA Roleplay", 
       "FiveM Server", 
       "Gaming Community",
-      "Los Santos",
-      "Whitelist Server"
+      "Los Santos"
     ],
     "ogImage": "/images/og-image.jpg",
     "twitterCard": "summary_large_image",
-    "twitterHandle": "@nightcityrp",
+    "twitterHandle": "@aftermathrp",
     "favicon": "/favicon.ico",
-    "themeColor": "#47761E",
+    "themeColor": "#FF5C00",
     "locale": "en_US",
-    "url": "https://nightcity-rp.com"
+    "url": "https://aftermathrp.xyz"
   },
   "legal": {
-    "companyName": "NightCity Roleplay",
-    "email": "contact@nightcity-rp.com",
-    "privacyEmail": "privacy@nightcity-rp.com",
-    "dpoEmail": "dpo@nightcity-rp.com",
-    "supportEmail": "support@nightcity-rp.com",
+    "companyName": "AfterMath RP",
+    "email": "contact@aftermathrp.xyz",
+    "privacyEmail": "privacy@aftermathrp.xyz",
+    "dpoEmail": "dpo@aftermathrp.xyz",
+    "supportEmail": "support@aftermathrp.xyz",
     "lastUpdated": "2025-01-01",
     "minAge": 16,
     "copyrightYear": 2025,
@@ -40,13 +39,13 @@
     }
   },
   "server": {
-    "name": "NightCity Roleplay",
+    "name": "AfterMath RP",
     "tagline": "Where Stories Come Alive",
     "description": "Experience the most immersive GTA V roleplay server with custom features, active community, and endless possibilities.",
-    "ip": "play.nightcity-rp.com",
+    "ip": "kbj7xr",
     "port": "30120",
-    "discord": "https://discord.gg/nightcity",
-    "maxPlayers": 256,
+    "discord": "https://discord.gg/98nAQqjJGb",
+    "maxPlayers": 128,
     "logo": {
       "type": "text",
       "content": "RP",
@@ -62,8 +61,8 @@
   "features": [
     {
       "id": "custom-framework",
-      "title": "Custom Framework",
-      "description": "Built from scratch for optimal performance",
+      "title": "Optimized Framework",
+      "description": "Built on a High Quality Framework.",
       "icon": "Code2"
     },
     {
@@ -81,7 +80,7 @@
     {
       "id": "housing",
       "title": "Housing System",
-      "description": "Own properties and customize your space",
+      "description": "Own properties, interiors and prices.",
       "icon": "Home"
     },
     {
@@ -201,17 +200,9 @@
         "id": "mechanic",
         "name": "Mechanic",
         "category": "civilian",
-        "description": "Repair and customize vehicles",
+        "description": "Repair and customize vehicles for different shops",
         "requirements": ["No requirements", "Training provided"],
         "image": "/images/jobs/mechanic.jpg"
-      },
-      {
-        "id": "taxi",
-        "name": "Taxi Driver",
-        "category": "civilian",
-        "description": "Transport citizens around the city",
-        "requirements": ["Valid license", "Clean driving record"],
-        "image": "/images/jobs/taxi.jpg"
       },
       {
         "id": "dealer",
@@ -260,55 +251,55 @@
   ],
   "team": [
     {
-      "id": "john-doe",
-      "name": "John Doe",
+      "id": "torrez",
+      "name": "Torrez",
       "role": "Server Owner",
-      "avatar": "/images/team/avatar1.jpg",
-      "discord": "johndoe",
+      "avatar": "/images/team/torrez.gif",
+      "discord": "torrez88jt",
       "description": "Founder and lead developer"
     },
     {
-      "id": "jane-smith",
-      "name": "Jane Smith",
-      "role": "Head Admin",
-      "avatar": "/images/team/avatar2.jpg",
-      "discord": "janesmith",
+      "id": "profan",
+      "name": "Profan",
+      "role": "Server Director",
+      "avatar": "/images/team/profan.webp",
+      "discord": "realprofan",
       "description": "Community management and support"
     },
     {
-      "id": "mike-wilson",
-      "name": "Mike Wilson",
-      "role": "Developer",
-      "avatar": "/images/team/avatar3.jpg",
-      "discord": "mikewilson",
-      "description": "Backend systems and optimization"
+      "id": "oblivion",
+      "name": "Oblivion",
+      "role": "Head Admin",
+      "avatar": "/images/team/oblivion.webp",
+      "discord": "edgehead6",
+      "description": "Head of Player support and moderation"
     },
     {
-      "id": "sarah-jones",
-      "name": "Sarah Jones",
-      "role": "Moderator",
-      "avatar": "/images/team/avatar4.jpg",
-      "discord": "sarahjones",
-      "description": "Player support and moderation"
+      "id": "yeet",
+      "name": "Yeet",
+      "role": "Developer",
+      "avatar": "/images/team/yeet.webp",
+      "discord": "yeeet.sk",
+      "description": "Coding and optimization"
     }
   ],
   "api": {
-    "serverCode": "replaceme",
+    "serverCode": "kbj7xr",
     "cfxApiUrl": "https://servers-frontend.fivem.net/api/servers/single/",
     "refreshInterval": 30000,
     "_comment": "Get your serverCode from https://servers.fivem.net - search your server and copy the ID from URL"
   },
   "social": {
-    "discord": "https://discord.gg/nightcity",
-    "twitter": "https://twitter.com/nightcityrp",
-    "youtube": "https://youtube.com/@nightcityrp",
-    "tiktok": "https://tiktok.com/@nightcityrp",
-    "instagram": "https://instagram.com/nightcityrp",
-    "twitch": "https://twitch.tv/nightcityrp"
+    "discord": "https://discord.gg/98nAQqjJGb",
+    "twitter": "https://twitter.com/aftermathrp",
+    "youtube": "https://youtube.com/@aftermathrp",
+    "tiktok": "https://tiktok.com/@aftermathrp",
+    "instagram": "https://instagram.com/aftermathrp",
+    "twitch": "https://twitch.tv/aftermathrp"
   },
   "whitelist": {
-    "enabled": true,
-    "applicationUrl": "https://apply.nightcity-rp.com",
+    "enabled": false,
+    "applicationUrl": "https://apply.aftermathrp.xyz",
     "requirements": [
       "Minimum age of 16 years",
       "Working microphone",
@@ -317,7 +308,7 @@
     ]
   },
   "donations": {
-    "enabled": true,
+    "enabled": false,
     "currency": "USD",
     "packages": [
       {

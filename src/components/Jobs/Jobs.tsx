@@ -184,13 +184,13 @@ export const Jobs = () => {
                     </div>
 
                     {/* Apply Button */}
-                    <div className={`mt-4 transition-all duration-500 ${
+                    {/* <div className={`mt-4 transition-all duration-500 ${
                       hoveredJob === job.id ? 'opacity-100' : 'opacity-0'
                     }`}>
                       <button className="w-full btn-gta text-sm">
                         Apply Now
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}
