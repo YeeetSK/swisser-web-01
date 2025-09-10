@@ -14,7 +14,8 @@ export const BottomNavigation = () => {
   const [activeSection, setActiveSection] = useState('home')
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
-  const [onlinePlayers, setOnlinePlayers] = useState<number | null>(null)
+  const [playerCount, setPlayerCount] = useState(0)
+  const [isServerOnline, setIsServerOnline] = useState(true)
 
   const navItems: NavItem[] = [
     { 
@@ -28,7 +29,7 @@ export const BottomNavigation = () => {
       label: 'Server', 
       icon: <Gamepad2 size={20} />,
       href: '#features',
-      badge: onlinePlayers !== null ? String(onlinePlayers) : undefined
+      badge: String(playerCount)
     },
     { 
       id: 'jobs', 
@@ -104,16 +105,54 @@ export const BottomNavigation = () => {
     return () => observer.disconnect()
   }, [])
 
-  // Simulate online players (in production, fetch from API)
+  // Fetch live player data from CFX.re API
   useEffect(() => {
-    setOnlinePlayers(Math.floor(Math.random() * 100) + 50)
-    const interval = setInterval(() => {
-      setOnlinePlayers(prev => {
-        const change = Math.floor(Math.random() * 10) - 5
-        const newCount = (prev || 0) + change
-        return Math.max(0, Math.min(128, newCount))
-      })
-    }, 30000) // Update every 30 seconds
+    const fetchPlayerData = async () => {
+      // Skip if no server code configured
+      if (!siteConfig.api.serverCode || siteConfig.api.serverCode === 'replaceme') {
+        console.warn('No server code configured. Please set your CFX.re server code in site.config.json')
+        setPlayerCount(Math.floor(Math.random() * 50) + 10)
+        setIsServerOnline(false)
+        return
+      }
+
+      try {
+        const response = await fetch(
+          `${siteConfig.api.cfxApiUrl}${siteConfig.api.serverCode}`,
+          {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+            }
+          }
+        )
+        
+        if (response.ok) {
+          const data = await response.json()
+          // CFX.re API returns data in Data.players array
+          if (data.Data && Array.isArray(data.Data.players)) {
+            const playerCount = data.Data.players.length
+            setPlayerCount(playerCount)
+            setIsServerOnline(true)
+          } else {
+            throw new Error('Invalid response format')
+          }
+        } else {
+          throw new Error('Failed to fetch server data')
+        }
+      } catch (error) {
+        console.warn('Failed to fetch player data:', error)
+        // Fallback to random number if API fails
+        setPlayerCount(Math.floor(Math.random() * 50) + 10)
+        setIsServerOnline(false)
+      }
+    }
+
+    // Initial fetch
+    fetchPlayerData()
+
+    // Set up interval for periodic updates
+    const interval = setInterval(fetchPlayerData, siteConfig.api.refreshInterval)
 
     return () => clearInterval(interval)
   }, [])
@@ -221,16 +260,14 @@ export const BottomNavigation = () => {
       <div className="absolute -top-6 left-0 right-0 h-6 bg-gta-black/90 backdrop-blur-sm border-t border-gta-dark/30 flex items-center justify-between px-4">
         <div className="flex items-center gap-2 text-xs">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gta-green opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-gta-green"></span>
+            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isServerOnline ? 'bg-gta-green' : 'bg-red-500'}`}></span>
+            <span className={`relative inline-flex rounded-full h-2 w-2 ${isServerOnline ? 'bg-gta-green' : 'bg-red-500'}`}></span>
           </span>
-          <span className="text-gta-light">Online</span>
-          {onlinePlayers !== null && (
-            <>
-              <span className="text-gta-medium">•</span>
-              <span className="text-white font-medium">{onlinePlayers}/128</span>
-            </>
-          )}
+          <span className="text-gta-light">{isServerOnline ? 'Online' : 'Offline'}</span>
+          <>
+            <span className="text-gta-medium">•</span>
+            <span className="text-white font-medium">{playerCount}/{siteConfig.server.maxPlayers}</span>
+          </>
         </div>
         <span className="text-gta-light text-xs font-mono">{siteConfig.server.ip}</span>
       </div>
