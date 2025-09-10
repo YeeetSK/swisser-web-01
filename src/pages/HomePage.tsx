@@ -5,7 +5,7 @@ import { Features } from '../components/Features/Features'
 import { Jobs } from '../components/Jobs/Jobs'
 import { Rules } from '../components/Rules/Rules'
 import { Team } from '../components/Team/Team'
-import { Gallery } from '../components/Gallery/Gallery'
+// import { Gallery } from '../components/Gallery/Gallery'
 import { Footer } from '../components/Footer/Footer'
 
 export const HomePage = () => {
