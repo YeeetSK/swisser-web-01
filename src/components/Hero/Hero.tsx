@@ -58,7 +58,6 @@ export const Hero = () => {
           // CFX.re API returns data in Data.players array
           if (data.Data && Array.isArray(data.Data.players)) {
             const playerCount = data.Data.players.length
-            const maxPlayers = data.Data.sv_maxclients || siteConfig.server.maxPlayers
             setPlayerCount(playerCount)
             setIsServerOnline(true)
             

@@ -76,7 +76,7 @@ export const createBatchScrollTrigger = (
       gsap.to(targets, { ...animation, overwrite: 'auto' })
     },
     ...triggerConfig
-  } as any)
+  } as ScrollTrigger.BatchVars)
 }
 
 // Export configured gsap and ScrollTrigger
